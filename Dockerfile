@@ -1,5 +1,28 @@
 FROM google/cloud-sdk:latest
 
+# following are labels to be carried with the image's manifest so they are discoverable in running environment not just in container registry
+# source of container image (regardless of mirroring that occurs)
+ARG IMAGE_SRC=unspecified
+LABEL image_src=${IMAGE_SRC}
+# traceability info about where the build occurred
+ARG BUILT_BY=unspecified
+LABEL built_by=${BUILT_BY}
+# semver string
+ARG SEMVER=unspecified
+LABEL semver=${SEMVER}
+# git repo built from
+ARG GIT_REPO=unspecified
+LABEL git_repo=${GIT_REPO}
+# git branch built from
+ARG GIT_BRANCH=unspecified
+LABEL git_branch=${GIT_BRANCH}
+# git commit id
+ARG GIT_COMMIT=unspecified
+LABEL git_commit=${GIT_COMMIT}
+# short description of any changes present in git repo clone - helps us ensure pipeline builds are not dirty and gives some traceability in local builds
+ARG GIT_STATUS=unspecified
+LABEL git_status=${GIT_STATUS}
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
     wget \
@@ -55,5 +78,7 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 # add yq using the go tools
-RUN go get gopkg.in/mikefarah/yq.v2
-RUN mv $GOPATH/bin/yq.v2 $GOPATH/bin/yq
+RUN go get -u gopkg.in/mikefarah/yq.v2 && mv $GOPATH/bin/yq.v2 $GOPATH/bin/yq
+
+# add ginkgo & gomega
+RUN go get -u github.com/onsi/ginkgo/ginkgo && go get -u github.com/onsi/gomega
