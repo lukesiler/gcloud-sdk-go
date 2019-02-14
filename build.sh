@@ -5,7 +5,7 @@ REPO=$(basename "$(git rev-parse --show-toplevel)")
 IMAGE_NAME=gcloud-sdk-plus
 IMAGE_TAG=latest
 
-docker build -t ${IMAGE_NAME}:${IMAGE_TAG} \
+docker build -t lukesiler/${IMAGE_NAME}:${IMAGE_TAG} \
             --build-arg IMAGE_SRC="docker.io/lukesiler/${IMAGE_NAME}:${IMAGE_TAG}" \
             --build-arg BUILT_BY="$(whoami)" \
             --build-arg BUILT_AT="$(date -u '+%F %T.%3N')" \
