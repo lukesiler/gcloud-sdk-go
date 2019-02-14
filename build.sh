@@ -1,3 +1,16 @@
 #!/bin/bash
 
-docker build -t gcloud-sdk-plus:latest .
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REPO=$(basename "$(git rev-parse --show-toplevel)")
+IMAGE_NAME=gcloud-sdk-plus
+IMAGE_TAG=latest
+
+docker build -t lukesiler/${IMAGE_NAME}:${IMAGE_TAG} \
+            --build-arg IMAGE_SRC="docker.io/lukesiler/${IMAGE_NAME}:${IMAGE_TAG}" \
+            --build-arg BUILT_BY="$(whoami)" \
+            --build-arg BUILT_AT="$(date -u '+%F %T.%3N')" \
+            --build-arg GIT_REPO="${REPO}" \
+            --build-arg GIT_BRANCH="${BRANCH}" \
+            --build-arg GIT_COMMIT="$(git rev-parse HEAD)" \
+            --build-arg GIT_STATUS="$(git status -s)" .
+#            --build-arg SEMVER=${DOCKER_TAG} \
