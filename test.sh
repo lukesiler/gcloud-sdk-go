@@ -1,7 +1,11 @@
 #!/bin/bash
 
-docker run lukesiler/gcloud-sdk-plus yq
-docker run lukesiler/gcloud-sdk-plus jq
-docker run lukesiler/gcloud-sdk-plus go version
-docker run lukesiler/gcloud-sdk-plus kubectl
-docker run lukesiler/gcloud-sdk-plus gcloud
+IMAGE_NAME=$(yq r data.yaml data.image-name)
+SEMVER=$(yq r data.yaml data.semver)
+
+docker run --rm ${IMAGE_NAME}:v${SEMVER} yq --version
+docker run --rm ${IMAGE_NAME}:v${SEMVER} jq --version
+docker run --rm ${IMAGE_NAME}:v${SEMVER} go version
+docker run --rm ${IMAGE_NAME}:v${SEMVER} kubectl version
+docker run --rm ${IMAGE_NAME}:v${SEMVER} gcloud version
+docker run --rm ${IMAGE_NAME}:v${SEMVER} ginkgo version

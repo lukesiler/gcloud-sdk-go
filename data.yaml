@@ -1,0 +1,6 @@
+data:
+  image-name: lukesiler/gcloud-sdk-plus
+  # 0.1.0 - first release with gcloud, go, yq and jq
+  # 0.2.0 - second release with ginkgo added
+  # 0.2.1 - rebuild of 0.2.0 with version tagging
+  semver: 0.2.1
