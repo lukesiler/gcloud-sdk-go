@@ -26,6 +26,7 @@ LABEL git_status=${GIT_STATUS}
 RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
     wget \
+    google-cloud-sdk-datastore-emulator \
     && rm -rf /var/lib/apt/lists/*
 
 # below is copied from https://github.com/docker-library/golang/blob/304174c7c604cbb7dd445ab58f479efe98f3bbf4/1.11/stretch/Dockerfile
