@@ -5,4 +5,5 @@ data:
   # 0.2.1 - rebuild of 0.2.0 with version tagging
   # 0.2.2 - rebuild to get ginkgo 1.8.0 with -mod support
   # 0.3.0 - add gcloud datastore emulator
-  semver: 0.3.0
+  # 0.3.1 - update golang to 1.12.9 and get latest gcloud to address datastore emulator flakiness seen in Bitbucket pipelines
+  semver: 0.3.1
