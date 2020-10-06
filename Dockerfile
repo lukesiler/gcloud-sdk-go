@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc-8-base \
     && rm -rf /var/lib/apt/lists/*
 
-# below is copied from https://github.com/docker-library/golang/blob/2f6469ffe955721dd25e4cbb3013506659998aad/1.12/stretch/Dockerfile
+# below is copied from https://github.com/docker-library/golang/blob/ee2d52a7ad3e077af02313cd4cd87fd39837412c/1.14/stretch/Dockerfile
 # only change is to set WORKDIR to $GOPATH
 
 # gcc for cgo
